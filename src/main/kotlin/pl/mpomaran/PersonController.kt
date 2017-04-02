@@ -10,9 +10,4 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class PersonController (val repository: PersonRepository) {
-    @GetMapping("/")
-    fun findAll() = repository.findAll()
-
-    @GetMapping("/{name}")
-    fun findByName(@PathVariable name: String) = repository.findByName(name)
 }
