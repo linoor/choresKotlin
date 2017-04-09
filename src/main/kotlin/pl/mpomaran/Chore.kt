@@ -14,7 +14,5 @@ class Chore(@NotNull var name: String = "",
             @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0
             ) {
 
-    override fun toString(): String {
-        return name
-    }
+    override fun toString(): String = name
 }

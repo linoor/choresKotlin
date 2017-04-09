@@ -12,7 +12,5 @@ class Person(@NotNull var name: String = "",
              @OneToMany(mappedBy = "person") var choreTasks: List<ChoreTask> = listOf(),
              @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0) {
 
-    override fun toString(): String {
-       return name
-    }
+    override fun toString(): String = name
 }
