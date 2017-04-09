@@ -30,16 +30,25 @@ open class ChoresApplication {
         personRepository.save(olenka)
 
         val cleaningKitchen = Chore("cleaning kitchen")
+        val prepareFood = Chore("prepare food")
         choreRepository.save(cleaningKitchen)
+        choreRepository.save(prepareFood)
 
-        val start = Calendar.getInstance()
+        var start = Calendar.getInstance()
         start.set(2017, 3, 13)
-        val end = Calendar.getInstance()
+        var end = Calendar.getInstance()
         start.set(2017, 3, 20)
 
         val exampleTask : ChoreTask = ChoreTask(cleaningKitchen, misiek, null, start, end)
         choreTaskRepository.save(exampleTask)
 
+
+        start = Calendar.getInstance()
+        start.set(2017, 3, 21)
+        end = Calendar.getInstance()
+        start.set(2017, 3, 26)
+        val otherTask : ChoreTask = ChoreTask(prepareFood, olenka, null, start, end)
+        choreTaskRepository.save(otherTask)
     }
 }
 

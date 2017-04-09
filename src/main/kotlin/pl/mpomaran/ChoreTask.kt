@@ -1,5 +1,6 @@
 package pl.mpomaran
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import javax.persistence.*
 import java.util.*
 
@@ -9,8 +10,16 @@ import java.util.*
 
 @Entity
 class ChoreTask(
-        @ManyToOne @JoinColumn(name="choreId", referencedColumnName = "ID") var chore: Chore = Chore(),
-        @ManyToOne @JoinColumn(name="personId", referencedColumnName = "ID") var person: Person = Person(),
+        @ManyToOne
+        @JoinColumn(name="choreId", referencedColumnName = "ID")
+        @JsonBackReference
+        var chore: Chore = Chore(),
+
+        @ManyToOne
+        @JoinColumn(name="personId", referencedColumnName = "ID")
+        @JsonBackReference
+        var person: Person = Person(),
+
         @Temporal(TemporalType.DATE) var dateDone: Calendar? = null,
         @Temporal(TemporalType.DATE) var dateFrom: Calendar = Calendar.getInstance(),
         @Temporal(TemporalType.DATE) var dateTo: Calendar = Calendar.getInstance(),

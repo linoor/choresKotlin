@@ -1,5 +1,6 @@
 package pl.mpomaran
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.*
 import javax.validation.constraints.NotNull
 
@@ -9,7 +10,11 @@ import javax.validation.constraints.NotNull
 
 @Entity
 class Person(@NotNull var name: String = "",
-             @OneToMany(mappedBy = "person") var choreTasks: List<ChoreTask> = listOf(),
+
+             @OneToMany(mappedBy = "person")
+             @JsonManagedReference
+             var choreTasks: List<ChoreTask> = listOf(),
+
              @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0) {
 
     override fun toString(): String = name

@@ -1,5 +1,6 @@
 package pl.mpomaran
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.*
 import javax.validation.constraints.NotNull
 
@@ -10,7 +11,11 @@ import javax.validation.constraints.NotNull
 @Entity
 class Chore(@NotNull var name: String = "",
             var description: String = "",
-            @OneToMany(mappedBy = "chore") var choreTasks: List<ChoreTask> = listOf(),
+
+            @OneToMany(mappedBy = "chore")
+            @JsonManagedReference
+            var choreTasks: List<ChoreTask> = listOf(),
+
             @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0
             ) {
 
