@@ -19,7 +19,8 @@ class ChoreTaskController (val choreTaskRepository: ChoreTaskRepository) {
     @GetMapping("/api/choreTasks/byweek")
     fun getByWeek() : ResponseEntity<Any> {
         val choreTasks = choreTaskRepository.findAll()
-        return ResponseEntity.ok(choreTasks)
+        val grouped = choreTasks.groupBy { Pair<Long, Long>(it.dateFrom.timeInMillis, it.dateTo.timeInMillis) }
+        return ResponseEntity.ok(grouped)
     }
 
     @Bean

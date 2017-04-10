@@ -39,8 +39,10 @@ open class ChoresApplication {
         var end = Calendar.getInstance()
         start.set(2017, 3, 20)
 
-        val exampleTask : ChoreTask = ChoreTask(cleaningKitchen, misiek, null, start, end)
+        val exampleTask: ChoreTask = ChoreTask(cleaningKitchen, misiek, null, start, end)
+        val secondTask: ChoreTask = ChoreTask(prepareFood, misiek, null, start, end)
         choreTaskRepository.save(exampleTask)
+        choreTaskRepository.save(secondTask)
 
 
         start = Calendar.getInstance()
