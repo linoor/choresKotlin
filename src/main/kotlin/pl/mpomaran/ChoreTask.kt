@@ -21,6 +21,7 @@ class ChoreTask(
         @JsonBackReference
         var person: Person = Person(),
 
+        // TODO make another model - week
         @Temporal(TemporalType.DATE) var dateDone: Calendar? = null,
         @Temporal(TemporalType.DATE) var dateFrom: Calendar = Calendar.getInstance(),
         @Temporal(TemporalType.DATE) var dateTo: Calendar = Calendar.getInstance(),

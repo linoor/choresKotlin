@@ -1,5 +1,6 @@
 import * as React from "react";
 import ChoreRow from "./ChoreRow";
+import * as axios from 'axios';
 
 
 interface IChoreTableProps {
@@ -11,7 +12,6 @@ interface IChoreTableState {
 }
 
 export default class ChoreTable extends React.Component<IChoreTableProps, IChoreTableState> {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -29,6 +29,16 @@ export default class ChoreTable extends React.Component<IChoreTableProps, IChore
                 "Misiek",
                 "Misiek"], ]
         };
+    }
+
+    componentDidMount() {
+        axios.get("http://localhost:8080/api/choreTasks/byweek")
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render() {
