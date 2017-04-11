@@ -1,1 +1,0 @@
-web: java $JVM_OPTS -cp target/clojurescript-chores.jar clojure.main -m clojurescript-chores.server
