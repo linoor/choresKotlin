@@ -23,7 +23,8 @@ open class ChoresApplication {
     @Bean
     open fun init(personRepository: PersonRepository,
                   choreRepository: ChoreRepository,
-                  choreTaskRepository: ChoreTaskRepository) = CommandLineRunner {
+                  choreTaskRepository: ChoreTaskRepository,
+                  weekRepository: WeekRepository) = CommandLineRunner {
         val misiek = Person("Misiek")
         val olenka = Person("Oleńka")
         personRepository.save(misiek)
@@ -39,18 +40,29 @@ open class ChoresApplication {
         var end = Calendar.getInstance()
         start.set(2017, 3, 20)
 
-        val exampleTask: ChoreTask = ChoreTask(cleaningKitchen, misiek, null, start, end)
-        val secondTask: ChoreTask = ChoreTask(prepareFood, misiek, null, start, end)
+        val week1 = Week(start, end)
+        weekRepository.save(week1)
+
+        val exampleTask: ChoreTask = ChoreTask(cleaningKitchen, misiek, null, week1)
+        val secondTask: ChoreTask = ChoreTask(prepareFood, misiek, null, week1)
         choreTaskRepository.save(exampleTask)
         choreTaskRepository.save(secondTask)
-
+        week1.choreTasks.add(exampleTask)
+        week1.choreTasks.add(secondTask)
+        weekRepository.save(week1)
 
         start = Calendar.getInstance()
         start.set(2017, 3, 21)
         end = Calendar.getInstance()
         start.set(2017, 3, 26)
-        val otherTask : ChoreTask = ChoreTask(prepareFood, olenka, null, start, end)
+
+        val week2 = Week(start, end)
+        weekRepository.save(week2)
+
+        val otherTask : ChoreTask = ChoreTask(prepareFood, olenka, null, week2)
         choreTaskRepository.save(otherTask)
+        week2.choreTasks.add(otherTask)
+        weekRepository.save(week2)
     }
 }
 

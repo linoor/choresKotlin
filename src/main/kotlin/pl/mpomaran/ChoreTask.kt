@@ -14,19 +14,19 @@ class ChoreTask(
         @ManyToOne
         @JoinColumn(name="choreId", referencedColumnName = "ID")
         @JsonBackReference
-        var chore: Chore = Chore(),
+        var chore: Chore? = null,
 
         @ManyToOne
         @JoinColumn(name="personId", referencedColumnName = "ID")
         @JsonBackReference
-        var person: Person = Person(),
+        var person: Person? = null,
 
-        // TODO make another model - week
         @Temporal(TemporalType.DATE) var dateDone: Calendar? = null,
-        @Temporal(TemporalType.DATE) var dateFrom: Calendar = Calendar.getInstance(),
-        @Temporal(TemporalType.DATE) var dateTo: Calendar = Calendar.getInstance(),
+
+        @ManyToOne var week: Week? = null,
+
         @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0) {
 
         @JsonProperty("chore_name")
-        var choreName: String = chore.name
+        var choreName: String = chore?.name ?: "no chore set"
 }
