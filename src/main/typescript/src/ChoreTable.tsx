@@ -8,22 +8,15 @@ interface IChoreTableProps {
 }
 
 interface IChoreTableState {
-    choresList: String[],
-    people: String[][]
+    choresList?: String[],
+    people?: String[][]
 }
 
 export default class ChoreTable extends React.Component<IChoreTableProps, IChoreTableState> {
     constructor(props) {
         super(props);
         this.state = {
-            choresList: [
-            "clean the kitchen",
-            "clean the floor",
-            "clean the toilet",
-            "clean the shower",
-            "clean the sink in the bathroom",
-            "prepare some food"
-            ],
+            choresList: [],
             people: [[
                 "Oleńka",
                 "Misiek",
@@ -33,6 +26,19 @@ export default class ChoreTable extends React.Component<IChoreTableProps, IChore
     }
 
     componentDidMount() {
+        axios.get("http://localhost:8080/api/chores")
+            .then(response => {
+                console.log("chorelist")
+                console.log(response)
+               this.setState({
+                   choresList: response.data["_embedded"].chores.map(e => e.name)
+               })
+            })
+            .catch(error => {
+                console.log("ERROR BIATCH")
+              console.log(error)
+        });
+
         axios.get("http://localhost:8080/api/choreTasks/byweek")
             .then(response => {
                 console.log(response)
@@ -54,30 +60,14 @@ export default class ChoreTable extends React.Component<IChoreTableProps, IChore
             <Table striped bordered condensed hover>
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>Chore Name</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Username</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td colSpan={2}>Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                { choreRows }
                 </tbody>
             </Table>
     );

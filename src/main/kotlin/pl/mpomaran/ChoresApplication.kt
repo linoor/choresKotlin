@@ -7,6 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
 import java.util.*
 import org.springframework.boot.web.servlet.ServletRegistrationBean
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+
+
 
 
 @SpringBootApplication
@@ -18,6 +23,15 @@ open class ChoresApplication {
         registration.addUrlMappings("/console/*")
         registration.addInitParameter("webAllowOthers", "true")
         return registration
+    }
+
+    @Bean
+    fun corsConfigurer(): WebMvcConfigurer {
+        return object : WebMvcConfigurerAdapter() {
+            override fun addCorsMappings(registry: CorsRegistry?) {
+                registry!!.addMapping("/api/**")
+            }
+        }
     }
 
     @Bean
