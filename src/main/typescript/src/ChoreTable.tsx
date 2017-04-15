@@ -1,6 +1,7 @@
 import * as React from "react";
 import ChoreRow from "./ChoreRow";
 import * as axios from 'axios';
+import { Table } from "react-bootstrap"
 
 
 interface IChoreTableProps {
@@ -50,13 +51,35 @@ export default class ChoreTable extends React.Component<IChoreTableProps, IChore
                 this.state.people.map(peopleRow  => peopleRow.map((people, i) => <th>Week {i+1}</th>)));
 
         return (
-            <table>
+            <Table striped bordered condensed hover>
+                <thead>
                 <tr>
-                    <th>Chore name</th>
-                    { weeks }
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
                 </tr>
-                { choreRows }
-            </table>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td colSpan={2}>Larry the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                </tbody>
+            </Table>
     );
     }
 }

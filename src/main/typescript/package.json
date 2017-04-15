@@ -47,7 +47,8 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react": "^0.14.9",
+    "react-bootstrap": "^0.30.8",
+    "react-dom": "^0.14.9"
   }
 }
