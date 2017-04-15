@@ -1,5 +1,6 @@
 package pl.mpomaran
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import java.util.*
 import javax.persistence.*
 
@@ -12,7 +13,8 @@ class Week(
         @Temporal(TemporalType.DATE) var dateFrom: Calendar = Calendar.getInstance(),
         @Temporal(TemporalType.DATE) var dateTo: Calendar = Calendar.getInstance(),
 
-        @OneToMany()
+        @OneToMany
+        @JsonBackReference
         var choreTasks: MutableList<ChoreTask> = mutableListOf(),
 
         @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0

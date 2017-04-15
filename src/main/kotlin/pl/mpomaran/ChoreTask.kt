@@ -1,6 +1,7 @@
 package pl.mpomaran
 
 import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 import java.util.*
@@ -13,20 +14,19 @@ import java.util.*
 class ChoreTask(
         @ManyToOne
         @JoinColumn(name="choreId", referencedColumnName = "ID")
-        @JsonBackReference
+        @JsonManagedReference
         var chore: Chore? = null,
 
         @ManyToOne
         @JoinColumn(name="personId", referencedColumnName = "ID")
-        @JsonBackReference
+        @JsonManagedReference
         var person: Person? = null,
 
         @Temporal(TemporalType.DATE) var dateDone: Calendar? = null,
 
-        @ManyToOne var week: Week? = null,
+        @ManyToOne
+        @JsonManagedReference
+        var week: Week? = null,
 
         @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0) {
-
-        @JsonProperty("chore_name")
-        var choreName: String = chore?.name ?: "no chore set"
 }

@@ -1,5 +1,6 @@
 package pl.mpomaran
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.*
 import javax.validation.constraints.NotNull
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotNull
 class Person(@NotNull var name: String = "",
 
              @OneToMany(mappedBy = "person")
-             @JsonManagedReference
+             @JsonBackReference
              var choreTasks: List<ChoreTask> = listOf(),
 
              @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0) {

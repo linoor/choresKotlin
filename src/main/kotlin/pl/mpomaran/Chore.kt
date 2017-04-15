@@ -1,5 +1,6 @@
 package pl.mpomaran
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.*
 import javax.validation.constraints.NotNull
@@ -13,7 +14,7 @@ class Chore(@NotNull var name: String = "",
             var description: String = "",
 
             @OneToMany(mappedBy = "chore")
-            @JsonManagedReference
+            @JsonBackReference
             var choreTasks: List<ChoreTask> = listOf(),
 
             @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0
