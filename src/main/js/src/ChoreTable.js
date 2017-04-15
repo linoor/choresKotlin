@@ -7,18 +7,18 @@ export default class ChoreTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            choreNames: ["No chores"],
+            chores: [],
             weeks: [],
             people: []
         };
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8080/api/choreTasks/bychore")
+        axios.get("http://localhost:8080/api/chores")
             .then(response => {
-                let chores = response.data;
+                let chores = response.data._embedded.chores
                 this.setState({
-                    choreNames: Object.keys(chores).map((choreName, chore) => choreName.toString()),
+                    choreNames: chores
                 })
             })
             .catch(error => {
@@ -37,8 +37,10 @@ export default class ChoreTable extends Component {
     }
 
     render() {
-        let choreRows = this.state.choreNames.map(choreName => {
-            let index = this.state.choreNames.indexOf(choreName);
+        let choreNames = this.state.chores.length === 0 ? ["No chores data"] : this.state.chores.map(chore => chore.name);
+        console.log(`printing chore names : ${choreNames}`)
+        let choreRows = choreNames.map(choreName => {
+            let index = choreNames.indexOf(choreName);
             let people = this.state.people[index];
             return <ChoreRow name={ choreName } people={ people } weeks={this.state.weeks} />
         });
