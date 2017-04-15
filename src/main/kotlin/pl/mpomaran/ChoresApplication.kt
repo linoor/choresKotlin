@@ -12,8 +12,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 
-
-
 @SpringBootApplication
 open class ChoresApplication {
 
@@ -46,8 +44,16 @@ open class ChoresApplication {
 
         val cleaningKitchen = Chore("cleaning kitchen")
         val prepareFood = Chore("prepare food")
+        val `clean the floor` = Chore("clean the floor")
+        val `clean the toilets` = Chore("clean the toilets")
+        val `clean the shower` = Chore("clean the shower")
+        val `clean the sink in the bathroom` = Chore("clean the sink in the bathroom")
         choreRepository.save(cleaningKitchen)
         choreRepository.save(prepareFood)
+        choreRepository.save(`clean the floor`)
+        choreRepository.save(`clean the toilets`)
+        choreRepository.save(`clean the shower`)
+        choreRepository.save(`clean the sink in the bathroom`)
 
         var start = Calendar.getInstance()
         start.set(2017, 3, 13)
@@ -73,7 +79,7 @@ open class ChoresApplication {
         val week2 = Week(start, end)
         weekRepository.save(week2)
 
-        val otherTask : ChoreTask = ChoreTask(prepareFood, olenka, null, week2)
+        val otherTask: ChoreTask = ChoreTask(prepareFood, olenka, null, week2)
         choreTaskRepository.save(otherTask)
         week2.choreTasks.add(otherTask)
         weekRepository.save(week2)

@@ -1,8 +1,10 @@
 import * as React from "react";
+import { Person } from "./ChoreTable"
 
 
 interface IChoreRowProps {
     name: String
+    people: Person[]
 }
 
 interface IChoreRowState {

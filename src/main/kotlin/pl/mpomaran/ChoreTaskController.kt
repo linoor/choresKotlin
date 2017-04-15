@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController
 @CrossOrigin(origins = arrayOf("http://localhost:3000"))
 @RestController
 class ChoreTaskController (val choreTaskRepository: ChoreTaskRepository) {
-    @GetMapping("/api/choreTasks/byweek")
+    @GetMapping("/api/choreTasks/bychore")
     fun getByWeek() : ResponseEntity<Any> {
         val choreTasks = choreTaskRepository.findAll()
-        val grouped = choreTasks.groupBy { it.week }
+        val grouped = choreTasks.groupBy { it.chore }
         return ResponseEntity.ok(grouped)
     }
 
