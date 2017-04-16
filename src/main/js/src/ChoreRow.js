@@ -6,7 +6,7 @@ export default class ChoreRow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            people: [],
+            chores: []
         }
     }
 
@@ -15,9 +15,7 @@ export default class ChoreRow extends Component {
             .then(response => {
                 let data = response.data;
                 this.setState({
-                    people: data.map(choreTask => {
-                        return choreTask.person
-                    })
+                    chores: response.data
                 })
             })
     }
@@ -32,17 +30,28 @@ export default class ChoreRow extends Component {
         }
     }
 
+    // updatePerson(personId, weekId, choreName) {
+    //     return (e) => {
+    //        e.preventDefault();
+    //        axios.put(`http://localhost:8080/api/chores/?personid=${personId}&weekid=${weekId}&chorename=${choreName}`)
+    //         .then(response => {
+    //             console.log(response)
+    //         })
+    //     }
+    // }
+
     render() {
         let peopleElems = [];
+        let people = this.state.chores.map(choreTask => choreTask.person);
         for (let i = 0; i < this.props.weeksNum; i++) {
-            let currentPerson = this.state.people[i];
+            let currentPerson = people[i];
             if (currentPerson !== undefined) {
-                peopleElems.push(<td>{currentPerson.name}</td>)
+                peopleElems.push(
+                    <td key={currentPerson.id}>{currentPerson.name}</td>)
             } else {
                 peopleElems.push(<td>None</td>)
             }
         }
-        console.log(peopleElems)
 
         return (
             <tr>
