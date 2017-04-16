@@ -49,9 +49,9 @@ export default class ChoreTable extends Component {
                         return { person: c.person.name, done: c.dateDone }
                     })
                 });
-                console.log(newRows)
                 this.setState({
-                    choreTasks: response.data
+                    choreTasks: response.data,
+                    rows: newRows
                 })
             })
     }
@@ -65,11 +65,21 @@ export default class ChoreTable extends Component {
         }
         let weekElems = weekNames.map(week => <th>{ week }</th>);
 
-        let choreRows = choreNames.map(choreName => {
-            let index = choreNames.indexOf(choreName);
-            let people = this.state.people[index];
-            return <ChoreRow name={ choreName } people={ people } weeks={this.state.weeks} />
-        });
+        let choreRows = [];
+        for (let row = 0; row < choreNames.length; row++) {
+            let people = []
+            let currentChoreName = choreNames[row];
+            for (let c = 0; c < weekNames.length; c++) {
+                let choreTask = this.state.choreTasks[currentChoreName];
+                if (choreTask === undefined) {
+                   people.push("None")
+                } else {
+                    people.push(choreTask.person)
+                }
+            }
+            choreRows.push(<ChoreRow name={ currentChoreName } people={ people } weeks={this.state.weeks} />)
+        }
+        console.log(choreRows)
 
         return (
             <Table striped bordered condensed hover>
