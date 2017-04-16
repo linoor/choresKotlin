@@ -39,8 +39,9 @@ export default class ChoreTable extends Component {
         }
         let weekElems = weekNames.map(week => <th>{ week }</th>);
 
+        let numWeeks = Object.keys(this.state.weeks).length
         let choreRows = choreNames.map(choreName => {
-            return <ChoreRow name={ choreName } />
+            return <ChoreRow name={ choreName } weeksNum={numWeeks} />
         });
 
         return (

@@ -6,7 +6,7 @@ export default class ChoreRow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            people: []
+            people: [],
         }
     }
 
@@ -33,9 +33,17 @@ export default class ChoreRow extends Component {
     }
 
     render() {
-        let peopleElems = this.state.people.map(person => {
-            return <td>{person.name}</td>
-        });
+        let peopleElems = [];
+        for (let i = 0; i < this.props.weeksNum; i++) {
+            let currentPerson = this.state.people[i];
+            if (currentPerson !== undefined) {
+                peopleElems.push(<td>{currentPerson.name}</td>)
+            } else {
+                peopleElems.push(<td>None</td>)
+            }
+        }
+        console.log(peopleElems)
+
         return (
             <tr>
                 <td>{ this.props.name }</td>
