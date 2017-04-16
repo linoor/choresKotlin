@@ -15,7 +15,6 @@ class Chore(@NotNull var name: String = "",
             @OneToMany(mappedBy = "chore")
             @JsonBackReference
             var choreTasks: List<ChoreTask> = listOf(),
-
             @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0
             ) {
 
