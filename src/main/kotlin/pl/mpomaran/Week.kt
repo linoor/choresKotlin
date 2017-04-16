@@ -11,8 +11,8 @@ import javax.persistence.*
 
 @Entity
 class Week(
-        @Temporal(TemporalType.DATE) var dateFrom: Calendar = Calendar.getInstance(),
-        @Temporal(TemporalType.DATE) var dateTo: Calendar = Calendar.getInstance(),
+        @Temporal(TemporalType.DATE) var dateFrom: Calendar? = null,
+        @Temporal(TemporalType.DATE) var dateTo: Calendar? = null,
 
         @OneToMany
         @JsonBackReference
@@ -23,6 +23,6 @@ class Week(
         override fun toString(): String {
             val stringFormat = SimpleDateFormat("yyyy-MMM-dd")
             val dateToStr = { cal: Calendar -> stringFormat.format(cal.time) }
-            return "${dateToStr(dateFrom)} ------> ${dateToStr(dateTo)}"
+            return "${dateToStr(dateFrom!!)} ------> ${dateToStr(dateTo!!)}"
         }
 }
