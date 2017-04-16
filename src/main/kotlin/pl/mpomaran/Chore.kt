@@ -1,8 +1,6 @@
 package pl.mpomaran
 
 import com.fasterxml.jackson.annotation.JsonBackReference
-import com.fasterxml.jackson.annotation.JsonManagedReference
-import org.springframework.web.bind.annotation.CrossOrigin
 import javax.persistence.*
 import javax.validation.constraints.NotNull
 

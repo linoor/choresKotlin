@@ -9,54 +9,45 @@ export default class ChoreTable extends Component {
         this.state = {
             chores: [],
             weeks: [],
-            people: []
+            people: [],
+            choreTasks: []
         };
     }
 
     componentDidMount() {
         axios.get("http://localhost:8080/api/chores")
             .then(response => {
-                let chores = response.data._embedded.chores
+                let chores = response.data._embedded.chores;
+
                 this.setState({
-                    choreNames: chores
+                    chores: chores
                 })
-            })
-            .catch(error => {
-                console.log(error)
             });
 
-        axios.get("http://localhost:8080/api/weeks")
+        axios.get("http://localhost:8080/api/choreTasks/week")
             .then(response => {
+                let choreTasks = response.data
+
                 this.setState({
-                    weeks: response.data._embedded.weeks
+                    choreTasks: choreTasks
                 })
-            })
-            .catch(error => {
-                console.log(error)
-            })
+            });
     }
 
     render() {
         let choreNames = this.state.chores.length === 0 ? ["No chores data"] : this.state.chores.map(chore => chore.name);
-        console.log(`printing chore names : ${choreNames}`)
         let choreRows = choreNames.map(choreName => {
             let index = choreNames.indexOf(choreName);
             let people = this.state.people[index];
             return <ChoreRow name={ choreName } people={ people } weeks={this.state.weeks} />
         });
 
-        let weeks = this.state.weeks.map(week => {
-            let from = new Date(week.dateFrom);
-            let to = new Date(week.dateTo);
-            let monthNames = ["January", "February", "March", "April", "May", "June",
-                    "July", "August", "September", "October", "November", "December"
-                ];
+        let weekNames = ["nope"];
+        if (this.state.choreTasks.length !== {}) {
+            weekNames = Object.keys(this.state.choreTasks)
+        }
 
-            let dateToStr = (date) => date.getFullYear() + "-" + (monthNames[date.getMonth() + 1]) + "-" + date.getDate();
-            return `${dateToStr(from)} ------ ${dateToStr(to)}`
-        });
-
-        let weekElems = weeks.map(week => <th>{ week }</th>);
+        let weekElems = weekNames.map(week => <th>{ week }</th>);
 
         return (
             <Table striped bordered condensed hover>

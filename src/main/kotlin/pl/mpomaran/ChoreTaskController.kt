@@ -20,9 +20,16 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class ChoreTaskController (val choreTaskRepository: ChoreTaskRepository) {
     @GetMapping("/api/choreTasks/bychore")
-    fun getByWeek() : ResponseEntity<Any> {
+    fun getByChore() : ResponseEntity<Any> {
         val choreTasks = choreTaskRepository.findAll()
         val grouped = choreTasks.groupBy { it.chore }
+        return ResponseEntity.ok(grouped)
+    }
+
+    @GetMapping("/api/choreTasks/week")
+    fun getByWeek() : ResponseEntity<Any> {
+        val choreTasks = choreTaskRepository.findAll()
+        val grouped = choreTasks.groupBy { it.week }
         return ResponseEntity.ok(grouped)
     }
 
