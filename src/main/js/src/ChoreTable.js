@@ -10,7 +10,8 @@ export default class ChoreTable extends Component {
             chores: [],
             weeks: [],
             people: [],
-            choreTasks: []
+            choreTasks: [],
+            rows: {}
         };
     }
 
@@ -33,6 +34,22 @@ export default class ChoreTable extends Component {
 
         axios.get("http://localhost:8080/api/choreTasks/bychore")
             .then(response => {
+                let choreTasksRows = Object.values(response.data);
+                let newRows = {}
+                let rows = choreTasksRows.map( row => {
+                    return row.map(c => {
+                        let choreName = c.chore.name
+                        let result = { person: c.person.name, done: c.dateDone };
+                        if (newRows[choreName] === undefined) {
+                            newRows[choreName] = [result]
+                        } else {
+                            newRows[choreName].push(result)
+                        }
+
+                        return { person: c.person.name, done: c.dateDone }
+                    })
+                });
+                console.log(newRows)
                 this.setState({
                     choreTasks: response.data
                 })
@@ -47,20 +64,6 @@ export default class ChoreTable extends Component {
             weekNames = Object.keys(this.state.weeks)
         }
         let weekElems = weekNames.map(week => <th>{ week }</th>);
-
-        let rows = [];
-        let chores = Object.values(this.state.choreTasks);
-        for (let i = 0; i < chores.length; i++) {
-            let newRow = [];
-            let choreTask = chores[i];
-            for (let j = 0; j < choreTask.length; j++) {
-                newRow.push(choreTask[j].person)
-                console.log("newRow=")
-                console.log(newRow)
-            }
-            rows.push(newRow)
-        }
-        console.log(rows);
 
         let choreRows = choreNames.map(choreName => {
             let index = choreNames.indexOf(choreName);

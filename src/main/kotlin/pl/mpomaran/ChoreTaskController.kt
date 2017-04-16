@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController
 
 @CrossOrigin(origins = arrayOf("http://localhost:3000"))
 @RestController
-class ChoreTaskController (val choreTaskRepository: ChoreTaskRepository) {
+class ChoreTaskController (val choreTaskRepository: ChoreTaskRepository,
+                           val choreRepository: ChoreRepository,
+                           val weekRepository: WeekRepository) {
     @GetMapping("/api/choreTasks/bychore")
     fun getByChore() : ResponseEntity<Any> {
         val choreTasks = choreTaskRepository.findAll()
