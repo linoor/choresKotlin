@@ -10,4 +10,5 @@ import org.springframework.web.bind.annotation.CrossOrigin
 @CrossOrigin(origins = arrayOf("http://localhost:3000"))
 interface ChoreRepository : CrudRepository<Chore, String> {
     fun findByName(name: String): List<Chore>
+    fun findOneByName(name: String): Chore?
 }

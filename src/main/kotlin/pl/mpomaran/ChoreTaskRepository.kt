@@ -8,4 +8,5 @@ import org.springframework.data.repository.CrudRepository
 
 interface ChoreTaskRepository : CrudRepository<ChoreTask, Long> {
     fun findByChoreName(name: String): List<ChoreTask>
+    fun findByChoreAndPerson(chore: Chore, person: Person): ChoreTask?
 }

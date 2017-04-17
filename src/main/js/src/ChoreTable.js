@@ -9,6 +9,7 @@ export default class ChoreTable extends Component {
         this.state = {
             chores: [],
             weeks: [],
+            weekIds: []
         };
     }
 
@@ -18,14 +19,16 @@ export default class ChoreTable extends Component {
                 let chores = response.data._embedded.chores;
 
                 this.setState({
-                    chores: chores
+                    chores: chores,
                 })
             });
 
         axios.get("http://localhost:8080/api/choreTasks/week")
             .then(response => {
+                debugger;
                 this.setState({
-                    weeks: response.data
+                    weeks: response.data,
+                    weekIds: Object.values(response.data).map(chores => chores[0].week.id)
                 })
             });
     }
@@ -39,9 +42,8 @@ export default class ChoreTable extends Component {
         }
         let weekElems = weekNames.map(week => <th>{ week }</th>);
 
-        let numWeeks = Object.keys(this.state.weeks).length
         let choreRows = choreNames.map(choreName => {
-            return <ChoreRow name={ choreName } weeksNum={numWeeks}/>
+            return <ChoreRow name={ choreName } weekIds={this.state.weekIds}/>
         });
 
         return (
