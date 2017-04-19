@@ -25,7 +25,6 @@ export default class ChoreTable extends Component {
 
         axios.get("http://localhost:8080/api/choreTasks/week")
             .then(response => {
-                debugger;
                 this.setState({
                     weeks: response.data,
                     weekIds: Object.values(response.data).map(chores => chores[0].week.id)

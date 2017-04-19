@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import * as axios from 'axios';
+import Cell  from "./Cell";
 
 export default class ChoreRow extends Component {
 
@@ -19,14 +20,13 @@ export default class ChoreRow extends Component {
                 // debugger;
                 let weekIds = this.props.weekIds;
                 let elems = weekIds.map(weekId => {
-                    debugger;
-                    console.log(this.props.choreName);
                     let choreForThisWeek = chores.find(chore => chore.week.id === weekId);
 
                     if (choreForThisWeek !== undefined) {
-                        return <td>{choreForThisWeek.person.name}</td>
+                        debugger;
+                        return <Cell name={choreForThisWeek.person.name} />
                     } else {
-                        return <td>None</td>
+                        return <Cell name="None" />
                     }
                 });
                 // debugger;
