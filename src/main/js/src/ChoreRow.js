@@ -23,10 +23,9 @@ export default class ChoreRow extends Component {
                     let choreForThisWeek = chores.find(chore => chore.week.id === weekId);
 
                     if (choreForThisWeek !== undefined) {
-                        debugger;
-                        return <Cell name={choreForThisWeek.person.name} />
+                        return <Cell people={this.props.people} key={choreForThisWeek.id} name={choreForThisWeek.person.name} />
                     } else {
-                        return <Cell name="None" />
+                        return <Cell people={this.props.people} name="None" />
                     }
                 });
                 // debugger;
