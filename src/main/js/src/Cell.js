@@ -49,14 +49,15 @@ export default class Cell extends Component {
         axios.put(`http://localhost:8080/api/` +
             `choreTasks/${this.props.choreTask.id}/person?` + `new_person_name=${chosenPerson}`)
             .then(response => {
-                console.log("person changed")
+                console.log("person changed");
+                this.props.updateChoreTasks();
             })
     }
 
     render() {
         let name;
 
-        if (this.props.choreTask === undefined) { return <td>None</td> }
+        if (this.props.choreTask === undefined) { return <td>No chore task</td> }
 
         const personName = this.props.choreTask !== undefined && this.props.choreTask.person !== null ?
             this.props.choreTask.person.name : "None";

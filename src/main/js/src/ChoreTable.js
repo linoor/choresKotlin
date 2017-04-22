@@ -12,6 +12,7 @@ export default class ChoreTable extends Component {
             weekIds: [],
             people: [{name: "None"}]
         };
+        this.updateChoreTasks = this.updateChoreTasks.bind(this)
     }
 
     componentDidMount() {
@@ -24,13 +25,7 @@ export default class ChoreTable extends Component {
                 })
             });
 
-        axios.get("http://localhost:8080/api/choreTasks/week")
-            .then(response => {
-                this.setState({
-                    weeks: response.data,
-                    weekIds: Object.values(response.data).map(chores => chores[0].week.id)
-                })
-            });
+        this.updateChoreTasks();
 
         axios.get("http://localhost:8080/api/persons")
             .then(response => {
@@ -38,6 +33,16 @@ export default class ChoreTable extends Component {
                     people: this.state.people.concat(response.data._embedded.persons)
                 })
             })
+    }
+
+    updateChoreTasks() {
+        axios.get("http://localhost:8080/api/choreTasks/week")
+            .then(response => {
+                this.setState({
+                    weeks: response.data,
+                    weekIds: Object.values(response.data).map(chores => chores[0].week.id)
+                })
+            });
     }
 
     render() {
@@ -50,7 +55,11 @@ export default class ChoreTable extends Component {
         let weekElems = weekNames.map(week => <th key={week.id} >{ week }</th>);
 
         let choreRows = choreNames.map(choreName => {
-            return <ChoreRow people={this.state.people} key={choreName} name={ choreName } weekIds={this.state.weekIds}/>
+            return <ChoreRow people={this.state.people}
+                             key={choreName}
+                             name={ choreName }
+                             weekIds={this.state.weekIds}
+                             updateChoreTasks={ () => this.updateChoreTasks() }/>
         });
 
         return (
