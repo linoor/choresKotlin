@@ -7,9 +7,10 @@ export default class Cell extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isClicked: false
+            isClicked: false,
         };
         this.onClick = this.onClick.bind(this);
+        this.change = this.change.bind(this);
     }
 
     onClick() {
@@ -23,11 +24,17 @@ export default class Cell extends Component {
     componentDidMount() {
     }
 
+    change(e) {
+        this.setState({
+            isClicked: false
+        })
+    }
+
     render() {
         let name;
         if (this.state.isClicked) {
             name = <FormGroup controlId="formControlsSelect">
-                <FormControl componentClass="select" placeholder="select">
+                <FormControl componentClass="select" placeholder="select" onChange={this.change}>
                     { this.props.people.map(person => {
                         return <option value={person.name}>{person.name}</option>
                     })}
