@@ -31,7 +31,7 @@ export default class Cell extends Component {
         });
 
         axios.put(`http://localhost:8080/api/` +
-            `choreTasks/${this.props.choreTask.id}/person?new_person_name=${chosenPerson}`)
+            `choreTasks/${this.props.choreTask.id}/person?` + `new_person_name=${chosenPerson}`)
             .then(response => {
                 console.log("person changed")
             })
@@ -40,7 +40,8 @@ export default class Cell extends Component {
     render() {
         let name;
 
-        debugger;
+        if (this.props.choreTask === undefined) { return <td>None</td> }
+
         const personName = this.props.choreTask !== undefined && this.props.choreTask.person !== null ?
             this.props.choreTask.person.name : "None";
 
@@ -56,7 +57,9 @@ export default class Cell extends Component {
                 </FormControl>
             </FormGroup>
         } else {
-            name = <td onClick={this.onClick}>{personName}</td>;
+            name = <td onClick={this.onClick}
+                       className={this.props.choreTask.dateDone === null ? "danger" : "success"}>
+                {personName}</td>;
         }
 
         return name

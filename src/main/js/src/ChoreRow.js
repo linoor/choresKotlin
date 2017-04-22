@@ -47,16 +47,6 @@ export default class ChoreRow extends Component {
         }
     }
 
-    // updatePerson(personId, weekId, choreName) {
-    //     return (e) => {
-    //        e.preventDefault();
-    //        axios.put(`http://localhost:8080/api/chores/?personid=${personId}&weekid=${weekId}&chorename=${choreName}`)
-    //         .then(response => {
-    //             console.log(response)
-    //         })
-    //     }
-    // }
-
     render() {
         let peopleElems = this.state.elems;
         let people = this.state.chores.map(choreTask => choreTask.person);

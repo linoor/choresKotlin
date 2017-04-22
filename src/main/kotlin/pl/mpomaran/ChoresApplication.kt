@@ -63,7 +63,9 @@ open class ChoresApplication {
         val week1 = Week(start, end)
         weekRepository.save(week1)
 
-        val exampleTask: ChoreTask = ChoreTask(cleaningKitchen, misiek, null, week1)
+        val doneDate = Calendar.getInstance()
+        doneDate.set(2017, 4, 10)
+        val exampleTask: ChoreTask = ChoreTask(cleaningKitchen, misiek, doneDate, week1)
         val secondTask: ChoreTask = ChoreTask(prepareFood, misiek, null, week1)
         choreTaskRepository.save(exampleTask)
         choreTaskRepository.save(secondTask)
