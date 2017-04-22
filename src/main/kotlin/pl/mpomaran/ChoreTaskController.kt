@@ -7,9 +7,8 @@ import org.springframework.hateoas.Resource
 import org.springframework.hateoas.ResourceProcessor
 import org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import javax.websocket.server.PathParam
 
 
 /**
@@ -20,7 +19,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class ChoreTaskController (val choreTaskRepository: ChoreTaskRepository,
                            val choreRepository: ChoreRepository,
-                           val weekRepository: WeekRepository) {
+                           val weekRepository: WeekRepository,
+                           val personRepository: PersonRepository) {
     @GetMapping("/api/choreTasks/bychore")
     fun getByChore() : ResponseEntity<Any> {
         val choreTasks = choreTaskRepository.findAll()
@@ -35,13 +35,32 @@ class ChoreTaskController (val choreTaskRepository: ChoreTaskRepository,
         return ResponseEntity.ok(grouped)
     }
 
-    @Bean
-    fun choreTaskProcessor(): ResourceProcessor<Resource<ChoreTask>> {
-        return ResourceProcessor { resource ->
-            val link = Link("http://localhost:8080/api/choreTasks", "byweek")
-            resource.add(link)
-            resource
+    @PutMapping("/api/choreTasks/{id}/person")
+    fun changePerson(@PathVariable("id") choreTaskId: Long,
+                     @RequestParam("new_person_name") newPersonName: String) : ResponseEntity<Any> {
+        val choreTask: ChoreTask? = choreTaskRepository.findOne(choreTaskId)
+        if (choreTask != null) {
+
+            when (newPersonName) {
+                "None" -> {
+                    choreTask.person = null
+                    choreTaskRepository.save(choreTask)
+                }
+                else -> {
+                    val person: Person? = personRepository.findOneByName(newPersonName)
+                    if (person != null) {
+                        choreTask.person = person
+                        choreTaskRepository.save(choreTask)
+
+                        return ResponseEntity.ok("The person has been changed")
+                    }
+                }
+            }
+
         }
+
+        return ResponseEntity.badRequest().build()
     }
+
 }
 

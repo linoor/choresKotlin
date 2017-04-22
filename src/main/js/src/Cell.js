@@ -25,23 +25,38 @@ export default class Cell extends Component {
     }
 
     change(e) {
+        const chosenPerson = e.target.value;
         this.setState({
             isClicked: false
-        })
+        });
+
+        axios.put(`http://localhost:8080/api/` +
+            `choreTasks/${this.props.choreTask.id}/person?new_person_name=${chosenPerson}`)
+            .then(response => {
+                console.log("person changed")
+            })
     }
 
     render() {
         let name;
+
+        debugger;
+        const personName = this.props.choreTask !== undefined && this.props.choreTask.person !== null ?
+            this.props.choreTask.person.name : "None";
+
         if (this.state.isClicked) {
             name = <FormGroup controlId="formControlsSelect">
-                <FormControl componentClass="select" placeholder="select" onChange={this.change}>
+                <FormControl componentClass="select"
+                             placeholder="select"
+                             onChange={this.change}
+                             defaultValue={personName}>
                     { this.props.people.map(person => {
                         return <option value={person.name}>{person.name}</option>
                     })}
                 </FormControl>
             </FormGroup>
         } else {
-            name = <td onClick={this.onClick}>{this.props.name}</td>;
+            name = <td onClick={this.onClick}>{personName}</td>;
         }
 
         return name

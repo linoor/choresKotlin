@@ -20,12 +20,12 @@ export default class ChoreRow extends Component {
                 // debugger;
                 let weekIds = this.props.weekIds;
                 let elems = weekIds.map(weekId => {
-                    let choreForThisWeek = chores.find(chore => chore.week.id === weekId);
+                    let choreTaskForThisWeek = chores.find(chore => chore.week.id === weekId);
 
-                    if (choreForThisWeek !== undefined) {
-                        return <Cell people={this.props.people} key={choreForThisWeek.id} name={choreForThisWeek.person.name} />
+                    if (choreTaskForThisWeek !== undefined) {
+                        return <Cell people={this.props.people} key={choreTaskForThisWeek.id} choreTask={choreTaskForThisWeek} />
                     } else {
-                        return <Cell people={this.props.people} name="None" />
+                        return <Cell people={this.props.people} />
                     }
                 });
                 // debugger;
