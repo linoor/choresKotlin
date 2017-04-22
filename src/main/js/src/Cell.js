@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as axios from 'axios';
 import {ControlLabel, FormControl, FormGroup} from "react-bootstrap";
+import * as ReactDOM from "react-dom";
 
 export default class Cell extends Component {
 
@@ -22,6 +23,21 @@ export default class Cell extends Component {
     }
 
     componentDidMount() {
+        document.addEventListener('click', this.handleClickOutside.bind(this), true);
+    }
+
+    componentWillUnmount() {
+            document.removeEventListener('click', this.handleClickOutside.bind(this), true);
+    }
+
+    handleClickOutside(event) {
+        const domNode = ReactDOM.findDOMNode(this);
+
+        if ((!domNode || !domNode.contains(event.target))) {
+            this.setState({
+                isClicked : false
+            });
+        }
     }
 
     change(e) {
