@@ -9,9 +9,12 @@ export default class Cell extends Component {
         super(props);
         this.state = {
             isClicked: false,
+            hover: false
         };
         this.onClick = this.onClick.bind(this);
         this.change = this.change.bind(this);
+        this.onMouseLeave = this.onMouseLeave.bind(this);
+        this.onMouseEnter = this.onMouseEnter.bind(this);
     }
 
     onClick() {
@@ -54,6 +57,18 @@ export default class Cell extends Component {
             })
     }
 
+    onMouseEnter() {
+       this.setState({
+          hover: true
+       })
+    }
+
+    onMouseLeave() {
+        this.setState({
+            hover: false
+        })
+    }
+
     render() {
         let name;
 
@@ -63,7 +78,7 @@ export default class Cell extends Component {
             this.props.choreTask.person.name : "None";
 
         if (this.state.isClicked) {
-            name = <FormGroup controlId="formControlsSelect">
+            name = <td controlId="formControlsSelect">
                 <FormControl componentClass="select"
                              placeholder="select"
                              onChange={this.change}
@@ -72,11 +87,19 @@ export default class Cell extends Component {
                         return <option value={person.name}>{person.name}</option>
                     })}
                 </FormControl>
-            </FormGroup>
+            </td>
         } else {
+            debugger;
+            const date = this.props.choreTask.dateDone !== null ?
+                new Date(this.props.choreTask.dateDone * 1000).toDateString() :
+                "";
             name = <td onClick={this.onClick}
+                       onMouseEnter={ this.onMouseEnter }
+                       onMouseLeave={ this.onMouseLeave }
                        className={this.props.choreTask.dateDone === null ? "danger" : "success"}>
-                {personName}</td>;
+                {personName}
+                { this.state.hover && date !== "" ? <span style={{"margin-left": "5px"}}>{date}</span> : "" }
+                </td>;
         }
 
         return name

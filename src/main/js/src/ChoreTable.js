@@ -63,7 +63,7 @@ export default class ChoreTable extends Component {
         });
 
         return (
-            <Table striped bordered condensed hover>
+            <Table striped bordered condensed hover id="chore-table">
                 <thead>
                 <tr>
                     <th>Chore Name</th>
