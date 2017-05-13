@@ -2,6 +2,12 @@ package pl.mpomaran
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import pl.mpomaran.chore.ChoreRepository
+import pl.mpomaran.choretask.ChoreTask
+import pl.mpomaran.choretask.ChoreTaskRepository
+import pl.mpomaran.person.Person
+import pl.mpomaran.person.PersonRepository
+import pl.mpomaran.week.WeekRepository
 
 /**
  * Created by linoor on 15.04.17.

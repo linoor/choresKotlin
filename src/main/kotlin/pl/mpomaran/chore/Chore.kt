@@ -1,6 +1,7 @@
-package pl.mpomaran
+package pl.mpomaran.chore
 
 import com.fasterxml.jackson.annotation.JsonBackReference
+import pl.mpomaran.choretask.ChoreTask
 import javax.persistence.*
 import javax.validation.constraints.NotNull
 

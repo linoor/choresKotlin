@@ -10,6 +10,14 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import pl.mpomaran.chore.Chore
+import pl.mpomaran.chore.ChoreRepository
+import pl.mpomaran.choretask.ChoreTask
+import pl.mpomaran.choretask.ChoreTaskRepository
+import pl.mpomaran.person.Person
+import pl.mpomaran.person.PersonRepository
+import pl.mpomaran.week.Week
+import pl.mpomaran.week.WeekRepository
 
 
 @SpringBootApplication

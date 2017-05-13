@@ -1,4 +1,4 @@
-package pl.mpomaran
+package pl.mpomaran.chore
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.web.bind.annotation.CrossOrigin

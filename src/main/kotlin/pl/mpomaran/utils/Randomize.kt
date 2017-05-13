@@ -1,7 +1,7 @@
 package pl.mpomaran.utils
 
-import pl.mpomaran.Person
-import pl.mpomaran.Chore
+import pl.mpomaran.person.Person
+import pl.mpomaran.chore.Chore
 import kotlin.repeat
 
 /**

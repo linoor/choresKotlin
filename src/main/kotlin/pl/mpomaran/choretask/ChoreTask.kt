@@ -1,8 +1,11 @@
-package pl.mpomaran
+package pl.mpomaran.choretask
 
 import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.fasterxml.jackson.annotation.JsonProperty
+import pl.mpomaran.person.Person
+import pl.mpomaran.week.Week
+import pl.mpomaran.chore.Chore
 import javax.persistence.*
 import java.util.*
 

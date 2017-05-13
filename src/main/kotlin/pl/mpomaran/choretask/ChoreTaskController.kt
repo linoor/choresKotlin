@@ -1,4 +1,4 @@
-package pl.mpomaran
+package pl.mpomaran.choretask
 
 import org.springframework.context.annotation.Bean
 import org.springframework.data.rest.webmvc.RepositoryRestController
@@ -8,6 +8,10 @@ import org.springframework.hateoas.ResourceProcessor
 import org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import pl.mpomaran.person.Person
+import pl.mpomaran.person.PersonRepository
+import pl.mpomaran.week.WeekRepository
+import pl.mpomaran.chore.ChoreRepository
 import javax.websocket.server.PathParam
 
 

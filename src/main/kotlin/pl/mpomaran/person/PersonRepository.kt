@@ -1,4 +1,4 @@
-package pl.mpomaran
+package pl.mpomaran.person
 
 import org.springframework.data.repository.CrudRepository
 

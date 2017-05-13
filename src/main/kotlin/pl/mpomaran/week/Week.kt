@@ -1,6 +1,7 @@
-package pl.mpomaran
+package pl.mpomaran.week
 
 import com.fasterxml.jackson.annotation.JsonBackReference
+import pl.mpomaran.choretask.ChoreTask
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.persistence.*

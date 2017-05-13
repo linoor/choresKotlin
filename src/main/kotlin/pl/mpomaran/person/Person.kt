@@ -1,7 +1,8 @@
-package pl.mpomaran
+package pl.mpomaran.person
 
 import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonManagedReference
+import pl.mpomaran.choretask.ChoreTask
 import javax.persistence.*
 import javax.validation.constraints.NotNull
 
