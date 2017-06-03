@@ -64,13 +64,13 @@ open class ChoresApplication {
         choreRepository.save(`clean the shower`)
         choreRepository.save(`clean the sink in the bathroom`)
 
-        var start = DateTime(2017, 3, 13, 0, 0)
+        var start = DateTime(2017, 3, 13, 0, 0, 0, 0)
         var end = DateTime(2017, 3, 20, 0, 0)
 
         val week1 = Week(start, end)
         weekRepository.save(week1)
 
-        val doneDate = DateTime(2017, 4, 10, 0, 0)
+        val doneDate = DateTime(2017, 4, 10, 0, 0, 0, 0)
         val exampleTask: ChoreTask = ChoreTask(cleaningKitchen, misiek, doneDate, week1)
         val secondTask: ChoreTask = ChoreTask(prepareFood, misiek, null, week1)
         choreTaskRepository.save(exampleTask)
@@ -79,8 +79,8 @@ open class ChoresApplication {
         week1.choreTasks.add(secondTask)
         weekRepository.save(week1)
 
-        start = DateTime(2017, 3, 21, 0, 0)
-        end = DateTime(2017, 3, 26, 0, 0)
+        start = DateTime(2017, 3, 21, 0, 0, 0, 0)
+        end = DateTime(2017, 3, 26, 0, 0, 0, 0)
 
         val week2 = Week(start, end)
         weekRepository.save(week2)

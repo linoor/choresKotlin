@@ -89,16 +89,16 @@ export default class Cell extends Component {
                 </FormControl>
             </td>
         } else {
-            debugger;
-            const date = this.props.choreTask.dateDone !== null ?
-                new Date(this.props.choreTask.dateDone * 1000).toDateString() :
+            let doneDate = this.props.choreTask.doneDate;
+            const date = doneDate !== null && doneDate !== undefined ?
+                new Date(doneDate).toDateString() :
                 "";
             name = <td onClick={this.onClick}
                        onMouseEnter={ this.onMouseEnter }
                        onMouseLeave={ this.onMouseLeave }
-                       className={this.props.choreTask.dateDone === null ? "danger" : "success"}>
+                       className={doneDate === null ? "danger" : "success"}>
                 {personName}
-                { this.state.hover && date !== "" ? <span style={{"margin-left": "5px"}}>{date}</span> : "" }
+                { this.state.hover && date !== "" ? <span style={{"margin-left": "5px"}}>({date})</span> : "" }
                 </td>;
         }
 
