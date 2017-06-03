@@ -1,12 +1,12 @@
 package pl.mpomaran.choretask
 
-import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonManagedReference
-import com.fasterxml.jackson.annotation.JsonProperty
 import pl.mpomaran.person.Person
 import pl.mpomaran.week.Week
 import pl.mpomaran.chore.Chore
 import javax.persistence.*
+import org.hibernate.annotations.Type
+import org.joda.time.DateTime
 import java.util.*
 
 /**
@@ -25,7 +25,8 @@ class ChoreTask(
         @JsonManagedReference
         var person: Person? = null,
 
-        @Temporal(TemporalType.DATE) var dateDone: Calendar? = null,
+        @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+        var doneDate: DateTime? = null,
 
         @ManyToOne
         @JsonManagedReference

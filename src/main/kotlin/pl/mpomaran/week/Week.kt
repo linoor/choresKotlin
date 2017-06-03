@@ -1,19 +1,19 @@
 package pl.mpomaran.week
 
 import com.fasterxml.jackson.annotation.JsonBackReference
+import org.hibernate.annotations.Type
+import org.joda.time.DateTime
 import pl.mpomaran.choretask.ChoreTask
 import java.text.SimpleDateFormat
-import java.util.*
 import javax.persistence.*
-
-/**
- * Created by linoor on 12.04.17.
- */
 
 @Entity
 class Week(
-        @Temporal(TemporalType.DATE) var dateFrom: Calendar? = null,
-        @Temporal(TemporalType.DATE) var dateTo: Calendar? = null,
+        @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+        var dateFrom: DateTime? = null,
+
+        @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+        var dateTo: DateTime? = null,
 
         @OneToMany
         @JsonBackReference
@@ -23,7 +23,6 @@ class Week(
 ) {
         override fun toString(): String {
             val stringFormat = SimpleDateFormat("yyyy-MMM-dd")
-            val dateToStr = { cal: Calendar -> stringFormat.format(cal.time) }
-            return "${dateToStr(dateFrom!!)} ------> ${dateToStr(dateTo!!)}"
+            return "$dateFrom ------> $dateTo"
         }
 }

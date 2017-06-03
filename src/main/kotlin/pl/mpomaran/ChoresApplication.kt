@@ -1,6 +1,7 @@
 package pl.mpomaran
 
 import org.h2.server.web.WebServlet
+import org.joda.time.DateTime
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -63,16 +64,13 @@ open class ChoresApplication {
         choreRepository.save(`clean the shower`)
         choreRepository.save(`clean the sink in the bathroom`)
 
-        var start = Calendar.getInstance()
-        start.set(2017, 3, 13)
-        var end = Calendar.getInstance()
-        start.set(2017, 3, 20)
+        var start = DateTime(2017, 3, 13, 0, 0)
+        var end = DateTime(2017, 3, 20, 0, 0)
 
         val week1 = Week(start, end)
         weekRepository.save(week1)
 
-        val doneDate = Calendar.getInstance()
-        doneDate.set(2017, 4, 10)
+        val doneDate = DateTime(2017, 4, 10, 0, 0)
         val exampleTask: ChoreTask = ChoreTask(cleaningKitchen, misiek, doneDate, week1)
         val secondTask: ChoreTask = ChoreTask(prepareFood, misiek, null, week1)
         choreTaskRepository.save(exampleTask)
@@ -81,10 +79,8 @@ open class ChoresApplication {
         week1.choreTasks.add(secondTask)
         weekRepository.save(week1)
 
-        start = Calendar.getInstance()
-        start.set(2017, 3, 21)
-        end = Calendar.getInstance()
-        start.set(2017, 3, 26)
+        start = DateTime(2017, 3, 21, 0, 0)
+        end = DateTime(2017, 3, 26, 0, 0)
 
         val week2 = Week(start, end)
         weekRepository.save(week2)
