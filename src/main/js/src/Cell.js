@@ -77,28 +77,44 @@ export default class Cell extends Component {
         const personName = this.props.choreTask !== undefined && this.props.choreTask.person !== null ?
             this.props.choreTask.person.name : "None";
 
+        let onClickName = <td controlId="formControlsSelect">
+            <FormControl componentClass="select"
+                         placeholder="select"
+                         onChange={this.change}
+                         defaultValue={personName}>
+                { this.props.people.map(person => {
+                    return <option value={person.name}>{person.name}</option>
+                })}
+            </FormControl>
+        </td>;
+
+
         if (this.state.isClicked) {
-            name = <td controlId="formControlsSelect">
-                <FormControl componentClass="select"
-                             placeholder="select"
-                             onChange={this.change}
-                             defaultValue={personName}>
-                    { this.props.people.map(person => {
-                        return <option value={person.name}>{person.name}</option>
-                    })}
-                </FormControl>
-            </td>
+            name = onClickName
         } else {
             let doneDate = this.props.choreTask.doneDate;
-            const date = doneDate !== null && doneDate !== undefined ?
+            let isDone = doneDate !== null && doneDate !== undefined;
+            const date = isDone ?
                 new Date(doneDate).toDateString() :
                 "";
+
+            let additionalInfo = null;
+            let isHover = this.state.hover;
+            if (isHover) {
+                let changeIcon = <span className={ isDone? "glyphicon glyphicon-remove" : "glyphicon glyphicon-ok"}></span>
+                additionalInfo = <span style={{"margin-left": "5px"}}>({date}) {changeIcon}</span>
+            } else {
+                additionalInfo = ""
+            }
+
+
+
             name = <td onClick={this.onClick}
                        onMouseEnter={ this.onMouseEnter }
                        onMouseLeave={ this.onMouseLeave }
                        className={doneDate === null ? "danger" : "success"}>
                 {personName}
-                { this.state.hover && date !== "" ? <span style={{"margin-left": "5px"}}>({date})</span> : "" }
+                {additionalInfo}
                 </td>;
         }
 
